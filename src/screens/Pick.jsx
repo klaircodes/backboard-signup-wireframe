@@ -14,13 +14,16 @@ function Panel({ path, onSelect }) {
         <p>{p.line}</p>
         <div className="best">Best for: {p.bestForInline}</div>
       </div>
-      <span className="panel-cta">{p.button}</span>
+      <span className="panel-cta">{p.cta}</span>
     </button>
   )
 }
 
+const LOGOS = ['chatgpt','claude','grok','deepseek','cohere','openrouter','bytedance','elevenlabs']
+
 export default function Pick() {
   const navigate = useNavigate()
+  const base = import.meta.env.BASE_URL
   const select = (path) => {
     track('path_selected', { path, source: 'click', hackathon: false })
     navigate(`/signup/account?path=${path}`)
@@ -30,9 +33,13 @@ export default function Pick() {
     <div className="page">
       <Bar step={1} right={<><a href="#" onClick={e => e.preventDefault()}>Docs</a><a href="#" onClick={e => e.preventDefault()}>Sign in</a></>} />
       <main className="content wide">
-        <div className="pick-head">
+        <div className="pick-hero">
           <h1>What are you building with?</h1>
-          <p>Pick one and you'll be set up in about two minutes.</p>
+          <p>Persistent memory, 17,000+ models, retrieval and threads. Pick your tool and you're set up in about two minutes.</p>
+          <div className="pick-logos">
+            {LOGOS.map(l => <img key={l} src={`${base}logos/${l}.png`} alt={l} />)}
+          </div>
+          <p className="pick-sub">Every frontier model on one account.</p>
         </div>
         <div className="panels">
           {PATH_ORDER.map(k => <Panel key={k} path={k} onSelect={select} />)}
