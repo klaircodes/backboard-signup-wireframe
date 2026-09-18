@@ -38,7 +38,7 @@ export default function SignUp() {
         <form className="signup" onSubmit={submit}>
           <header className="signup-head">
             <h1>Create your account</h1>
-            <p className="sub">Free. $5 memory credits. No credit card.</p>
+            <p className="sub">Free to start. $5 in memory credits, no credit card.</p>
           </header>
 
           <div className="path-row">
@@ -72,7 +72,7 @@ export default function SignUp() {
 
           <div className="signup-foot">
             <Btn primary full type="submit" disabled={!ready}>{p.button}</Btn>
-            <p className="fine">Free. $5 memory credits. No credit card.</p>
+            <p className="fine">Free to start. $5 in memory credits, no credit card.</p>
           </div>
         </form>
         <p className="fine below"><Link to="/signin">Already have an account? Sign in</Link></p>

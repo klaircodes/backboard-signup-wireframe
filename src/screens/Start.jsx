@@ -23,7 +23,7 @@ export default function Start() {
         <div className="start2">
           <header className="done">
             <h1>{first ? `You're in, ${first}.` : "You're in."}</h1>
-            <p className="sub">Your account is ready. About {p.setup} to your first result.</p>
+            <p className="sub">Your account is ready. {p.setup} to your first result.</p>
             <dl className="stats">
               <div><dt>Path</dt><dd>{p.title}</dd></div>
               <div><dt>Setup time</dt><dd>About {p.setup}</dd></div>

@@ -105,15 +105,15 @@ p { margin: 0; }
 .video .caption { position: absolute; left: 16px; bottom: 16px; background: rgba(16, 17, 22, 0.88); border: 1px solid var(--line-2); border-radius: 999px; padding: 5px 11px; font-size: 12.5px; font-weight: 500; color: var(--text-2); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 
 /* Landing ------------------------------------------------------ */
-.hero { position: relative; isolation: isolate; padding: 64px 0 0; animation: reveal 560ms var(--ease) both; }
+.hero { position: relative; isolation: isolate; padding: 48px 0 0; animation: reveal 560ms var(--ease) both; }
 .hero h1 { max-width: 680px; font-size: 52px; }
 .hero .sub { max-width: 600px; margin-bottom: 30px; }
-.logos { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; color: var(--text); opacity: 0.55; margin-bottom: 40px; transition: opacity 200ms var(--ease); }
+.logos { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; color: var(--text); opacity: 0.55; margin-top: 24px; margin-bottom: 0; transition: opacity 200ms var(--ease); }
 .logos:hover { opacity: 0.8; }
 .logos img, .logos svg { display: block; width: auto; }
 @media (max-width: 600px) { .logos { gap: 14px 28px; } .logos img, .logos svg { transform: scale(0.85); transform-origin: left center; } }
 .hero-video { aspect-ratio: 16 / 9; }
-.pick { padding: 64px 0 0; }
+.pick { padding: 48px 0 0; }
 .sec-head { margin-bottom: 20px; animation: reveal 520ms var(--ease) 140ms both; }
 .sec-head p { color: var(--text-3); font-size: 15px; }
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
@@ -129,7 +129,7 @@ p { margin: 0; }
 .pcard .btn { pointer-events: none; font-size: 14px; padding: 0 12px; }
 .pcard:hover .btn, .pcard:focus-visible .btn, .pcard.selected .btn { background: var(--teal); border-color: transparent; color: #fff; }
 .go { text-align: center; font-size: 13px; margin: 20px 0 0; animation: reveal 520ms var(--ease) 440ms both; }
-.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 64px; padding: 40px 0 72px; border-top: 1px solid var(--line); animation: reveal 520ms var(--ease) 520ms both; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 48px; padding: 32px 0 56px; border-top: 1px solid var(--line); animation: reveal 520ms var(--ease) 520ms both; }
 @media (max-width: 760px) { .cols { grid-template-columns: 1fr; gap: 28px; } }
 .col h3 { margin-bottom: 8px; }
 .col .lead { color: var(--text); font-size: 14.5px; margin-bottom: 8px; }
