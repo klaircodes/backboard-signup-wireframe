@@ -55,8 +55,10 @@ export default function Start() {
             )}
             {path === 'api' && (
               <>
-                <p className="step-detail">Same key, same memory, same 17,000+ models, inside the tool you open every day.</p>
-                <div className="three" style={{ marginTop: 10 }}>
+                <p className="step-detail">Claude Code, Cursor or VS Code. Also works with Codex, Windsurf and any MCP client.</p>
+                <Btn primary full onClick={() => cta('studio-connect')} style={{ marginTop: 10 }}>Connect to Backboard Studio</Btn>
+                <p className="help" style={{ marginTop: 8 }}>Don't have Studio installed? <button type="button" className="link" onClick={() => cta('studio-download')}><b>Download Backboard Studio</b></button>, then return here and click "Connect to Backboard Studio" to add the Backboard Docs MCP server.</p>
+                <div className="three" style={{ marginTop: 16 }}>
                   {HARNESSES.map((h) => <Btn key={h} primary={harness === h} onClick={() => { setHarness(h); cta(h) }}>{h}</Btn>)}
                 </div>
                 <p className="help" style={{ marginTop: 6 }}>Also: Codex, Windsurf, any MCP client</p>
