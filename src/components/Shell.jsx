@@ -9,7 +9,7 @@ export function AuthLayout({ path = 'studio', children }) {
   return (
     <div className="auth">
       <aside className="auth-side" aria-hidden="true">
-        <div className="auth-brand"><img src={`${base}brand/emblem-white.png`} alt="" /><span>Backboard</span></div>
+        <img className="auth-brand" src={`${base}brand/logo-white.svg`} alt="Backboard" />
         <div className="auth-pitch">
           <h2>Ship stateful AI, fast.</h2>
           <ul>{PROOF.map((t) => <li key={t}>{t}</li>)}</ul>
@@ -17,7 +17,7 @@ export function AuthLayout({ path = 'studio', children }) {
         <div className="auth-visual" key={path}><Shot /><span className="auth-visual-cap">{PATHS[path]?.title || 'Backboard Studio'}</span></div>
       </aside>
       <main className="auth-form">
-        <div className="auth-brand auth-brand-mobile"><img src={`${base}brand/emblem-white.png`} alt="" /><span>Backboard</span></div>
+        <img className="auth-brand auth-brand-mobile" src={`${base}brand/logo-white.svg`} alt="Backboard" />
         <div className="auth-card">{children}</div>
       </main>
     </div>
@@ -29,7 +29,7 @@ export function SoloLayout({ children }) {
   return (
     <div className="auth auth-solo">
       <main className="auth-form">
-        <div className="auth-brand auth-brand-fixed"><img src={`${base}brand/emblem-white.png`} alt="" /><span>Backboard</span></div>
+        <a href={base} className="auth-brand auth-brand-fixed"><img src={`${base}brand/logo-white.svg`} alt="Backboard" /></a>
         <div className="auth-card">{children}</div>
       </main>
     </div>
@@ -38,5 +38,5 @@ export function SoloLayout({ children }) {
 
 export function Wordmark() {
   const base = import.meta.env.BASE_URL
-  return <a href={base} className="inline-brand"><img src={`${base}brand/emblem-white.png`} alt="" /><span>Backboard</span></a>
+  return <a href={base} className="inline-brand"><img src={`${base}brand/logo-white.svg`} alt="Backboard" /></a>
 }
