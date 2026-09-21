@@ -427,3 +427,8 @@ a.crumb.done:hover { color: var(--text); }
   .auth-brand-mobile { display: flex; }
   .auth-form { padding: 96px 20px 56px; align-items: flex-start; }
 }
+
+/* Sign in: form only, brand pinned top-left ------------------------------- */
+.auth-solo { grid-template-columns: 1fr; }
+.auth-solo .auth-brand-fixed { display: flex; position: absolute; top: 28px; left: 28px; }
+@media (max-width: 880px) { .auth-solo .auth-brand-fixed { top: 28px; left: 24px; } }

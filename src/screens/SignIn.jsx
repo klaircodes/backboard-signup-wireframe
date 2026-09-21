@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { AuthLayout } from '../components/Shell.jsx'
+import { SoloLayout } from '../components/Shell.jsx'
 import { Btn, Field } from '../components/Hack.jsx'
 import { GoogleIcon, GithubIcon } from '../components/Icons.jsx'
 import { getAccount } from '../lib/track.js'
@@ -10,7 +10,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const go = () => navigate(getAccount() ? '/dashboard' : '/signup')
   return (
-    <AuthLayout path={getAccount()?.path || 'studio'}>
+    <SoloLayout>
       <h1>Sign in</h1>
       <p className="auth-lede">Welcome back. Pick up where you left off.</p>
       <div className="auth-stack">
@@ -25,6 +25,6 @@ export default function SignIn() {
         <Link to="/signup" className="btn">Create an account</Link>
       </div>
       <p className="auth-legal"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><a href="#" onClick={(e) => e.preventDefault()}>Privacy</a><a href="#" onClick={(e) => e.preventDefault()}>Terms</a></p>
-    </AuthLayout>
+    </SoloLayout>
   )
 }
