@@ -382,3 +382,18 @@ a.crumb.done:hover { color: var(--text); }
 .tile-name { font-size: 12.5px; font-weight: 600; color: var(--text-2); padding: 0 4px; transition: color 180ms var(--ease); }
 .tile.selected .tile-name { color: var(--text); }
 .tile-desc { min-height: 40px; font-size: 13px; line-height: 1.5; color: var(--text-3); margin-bottom: 20px; }
+
+/* Login page: no bar, the fork between sign in and create account -------- */
+.login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 48px 24px; }
+.login-card { width: 100%; max-width: 400px; animation: reveal 420ms var(--ease) both; }
+.login-mark { display: block; height: 28px; width: auto; margin-bottom: 22px; }
+.login-card h1 { font-size: 28px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.12; margin: 0 0 6px; }
+.login-lede { color: var(--text-3); font-size: 14px; margin-bottom: 24px; }
+.login-new { margin-top: 28px; padding: 18px 18px 16px; border-radius: 10px; background: var(--s1); display: flex; flex-direction: column; gap: 14px; }
+.login-new > div { display: flex; flex-direction: column; gap: 3px; }
+.login-new b { font-size: 14.5px; font-weight: 600; }
+.login-new span { font-size: 13.5px; line-height: 1.5; color: var(--text-3); }
+.login-new .btn { text-decoration: none; }
+.login-foot { margin-top: 28px; display: flex; justify-content: center; gap: 20px; }
+.login-foot a { font-size: 12.5px; color: var(--text-3); text-decoration: none; }
+.login-foot a:hover { color: var(--text); }

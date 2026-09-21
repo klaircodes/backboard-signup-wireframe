@@ -35,7 +35,7 @@ export default function SignUp() {
       <header className="bar">
         <div className="bar-left"><Link to="/" className="wordmark">Backboard</Link></div>
         <Stepper step={path ? 2 : 1} />
-        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><Link to="/">Sign in</Link></nav>
+        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a></nav>
       </header>
       <main className="auth-main">
         <div className="auth-card">
