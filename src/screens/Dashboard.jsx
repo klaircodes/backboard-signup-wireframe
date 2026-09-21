@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Btn } from '../components/Hack.jsx'
+import { Wordmark } from '../components/Shell.jsx'
 import { PATHS } from '../data/paths.js'
 import { getAccount } from '../lib/track.js'
 
@@ -11,11 +12,7 @@ export default function Dashboard() {
   const p = account ? PATHS[account.path] : null
   return (
     <div className="page">
-      <header className="bar">
-        <div className="bar-left"><a href="/" className="wordmark">Backboard</a></div>
-        <div />
-        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Help</a></nav>
-      </header>
+      <div className="topline"><Wordmark /><a href="#" className="topline-link" onClick={(e) => e.preventDefault()}>Help</a></div>
       <main className="wrap" style={{ paddingTop: 32, paddingBottom: 88 }}>
         {!account ? <p className="sub">No account yet. <Link to="/signup">Sign up</Link>.</p> : (
           <>

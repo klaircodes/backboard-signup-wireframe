@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { AppBar, Btn, Video, Copy } from '../components/Hack.jsx'
+import { Btn, Video, Copy } from '../components/Hack.jsx'
+import { Wordmark } from '../components/Shell.jsx'
 import { isPath, PATHS } from '../data/paths.js'
 import { getAccount, track } from '../lib/track.js'
 
@@ -18,7 +19,7 @@ export default function Start() {
 
   return (
     <div className="page">
-      <AppBar step={3} />
+      <div className="topline"><Wordmark /><Link to="/dashboard" className="topline-link">Dashboard</Link></div>
       <main className="wrap narrow">
         <div className="start2">
           <header className="done">

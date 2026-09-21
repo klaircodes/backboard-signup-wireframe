@@ -10,7 +10,6 @@ export default function App() {
       <Route path="/" element={<SignIn />} />
       <Route path="/signin" element={<Navigate to="/" replace />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/signup/account" element={<Navigate to="/signup" replace />} />
       <Route path="/start/:path" element={<Start />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<Navigate to="/" replace />} />
