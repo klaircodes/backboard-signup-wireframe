@@ -32,10 +32,11 @@ export function Stepper({ step }) {
 export function SiteNav() {
   return (
     <header className="bar">
-      <div className="bar-left"><Link to="/signup" className="wordmark"><img src={`${import.meta.env.BASE_URL}brand/logo-white.svg`} alt="Backboard" /></Link></div>
+      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
       <Stepper step={1} />
       <nav className="bar-links">
         <a href="#" onClick={(e) => e.preventDefault()}>Docs</a>
+        <a href="#" onClick={(e) => e.preventDefault()}>Sign in</a>
       </nav>
     </header>
   )
@@ -44,7 +45,7 @@ export function SiteNav() {
 export function AppBar({ step = 2 }) {
   return (
     <header className="bar">
-      <div className="bar-left"><Link to="/signup" className="wordmark"><img src={`${import.meta.env.BASE_URL}brand/logo-white.svg`} alt="Backboard" /></Link></div>
+      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
       <Stepper step={step} />
       <a href="#" className="bar-help" onClick={(e) => e.preventDefault()}>Help</a>
     </header>
