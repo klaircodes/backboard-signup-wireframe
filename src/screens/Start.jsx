@@ -12,8 +12,10 @@ export default function Start() {
   const [windows, setWindows] = useState(false)
   const [harness, setHarness] = useState(null)
   if (!isPath(path)) return <Navigate to="/signup" replace />
-  const p = PATHS[path]
   const account = getAccount()
+  if (!account) return <Navigate to="/signup" replace />
+  if (account.onboarded) return <Navigate to="/dashboard" replace />
+  const p = PATHS[path]
   const first = account?.first?.trim()
   const cta = (detail) => track('start_cta_clicked', { path, hackathon: false, detail })
 
