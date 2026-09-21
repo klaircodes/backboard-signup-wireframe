@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import { PATHS } from '../data/paths.js'
 import { SHOTS, HeroStill } from './Illos.jsx'
@@ -5,6 +6,8 @@ import { SHOTS, HeroStill } from './Illos.jsx'
 const STEPS = ['Pick a path', 'Sign up', 'Start building']
 
 // Progress across both domains: a plain breadcrumb (done · current · next) and a line under the bar that fills.
+const STEP_LINKS = ['/signup', null, null]
+
 export function Stepper({ step }) {
   return (
     <>
@@ -12,9 +15,10 @@ export function Stepper({ step }) {
         {STEPS.map((label, i) => {
           const n = i + 1
           const state = n < step ? 'done' : n === step ? 'on' : ''
+          const to = n < step ? STEP_LINKS[i] : null
           return (
             <span key={label} className="crumb-wrap">
-              <span className={`crumb ${state}`} aria-current={n === step ? 'step' : undefined}>{label}</span>
+              {to ? <Link to={to} className={`crumb ${state}`}>{label}</Link> : <span className={`crumb ${state}`} aria-current={n === step ? 'step' : undefined}>{label}</span>}
               {i < STEPS.length - 1 ? <span className="crumb-sep" aria-hidden="true">›</span> : null}
             </span>
           )
@@ -28,7 +32,7 @@ export function Stepper({ step }) {
 export function SiteNav() {
   return (
     <header className="bar">
-      <div className="bar-left"><a href="#" className="wordmark" onClick={(e) => e.preventDefault()}>Backboard</a></div>
+      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
       <Stepper step={1} />
       <nav className="bar-links">
         <a href="#" onClick={(e) => e.preventDefault()}>Docs</a>
@@ -41,7 +45,7 @@ export function SiteNav() {
 export function AppBar({ step = 2 }) {
   return (
     <header className="bar">
-      <div className="bar-left"><a href="#" className="wordmark" onClick={(e) => e.preventDefault()}>Backboard</a></div>
+      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
       <Stepper step={step} />
       <a href="#" className="bar-help" onClick={(e) => e.preventDefault()}>Help</a>
     </header>

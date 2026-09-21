@@ -53,7 +53,8 @@ p { margin: 0; }
 .crumbs { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
 .crumb-wrap { display: inline-flex; align-items: center; gap: 12px; }
 .crumb { font-size: 13px; font-weight: 500; color: rgba(139, 151, 168, 0.55); transition: color 200ms var(--ease); }
-.crumb.done { color: var(--text-3); }
+.crumb.done { color: var(--text-3); text-decoration: none; }
+a.crumb.done:hover { color: var(--text); }
 .crumb.on { color: var(--text); }
 .crumb-sep { color: rgba(139, 151, 168, 0.45); font-size: 14px; }
 .bar-progress { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--cyan); transform-origin: left; transition: transform 600ms var(--ease); }
