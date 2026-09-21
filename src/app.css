@@ -356,12 +356,3 @@ a.crumb.done:hover { color: var(--text); }
 .signup-divider::before, .signup-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .signup-divider span { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
 .signup-terms { text-align: center; font-size: 13px; color: var(--text-3); margin-top: 6px; }
-
-/* Button hover: text swipe + bg/border transition (matches the Framer site) */
-.btn { position: relative; overflow: hidden; }
-.btn-label { display: inline-flex; transition: transform 0.3s ease, opacity 0.2s ease; }
-.btn-hover { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transform: translateY(100%); opacity: 0; transition: transform 0.3s ease, opacity 0.2s ease; font-weight: inherit; }
-.btn:hover .btn-label { transform: translateY(-100%); opacity: 0; }
-.btn:hover .btn-hover { transform: translateY(0); opacity: 1; }
-.btn:active .btn-label { transition-duration: 0.15s; }
-.btn:active .btn-hover { transition-duration: 0.15s; }

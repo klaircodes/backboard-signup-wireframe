@@ -60,9 +60,9 @@ export function Mark() {
   )
 }
 
-export function Btn({ primary, full, small, className = '', children, ...rest }) {
+export function Btn({ primary, full, small, className = '', ...rest }) {
   const cls = ['btn', primary && 'primary', full && 'full', small && 'small', className].filter(Boolean).join(' ')
-  return <button type="button" className={cls} {...rest}><span className="btn-label">{children}</span><span className="btn-hover" aria-hidden="true">{children}</span></button>
+  return <button type="button" className={cls} {...rest} />
 }
 
 export function Field({ label, className = '', ...rest }) {
