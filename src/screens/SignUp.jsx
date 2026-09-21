@@ -10,9 +10,7 @@ export default function SignUp() {
   const navigate = useNavigate()
   const [path] = usePathParam()
   const [first, setFirst] = useState('')
-  const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
-  const [company, setCompany] = useState('')
   if (!path) return <Navigate to="/signup" replace />
   const p = PATHS[path]
   const Shot = SHOTS[path]
@@ -38,7 +36,6 @@ export default function SignUp() {
         <form className="signup" onSubmit={submit}>
           <header className="signup-head">
             <h1>Create your account</h1>
-            <p className="sub">Free to start. $5 in memory credits, no credit card.</p>
           </header>
 
           <div className="path-row">
@@ -51,31 +48,19 @@ export default function SignUp() {
           </div>
 
           <section className="group">
-            <div className="group-head"><h2>Continue with</h2></div>
+            <Btn full onClick={() => social('google')}>Continue with Google</Btn>
+            <Btn full onClick={() => social('github')}>Continue with GitHub</Btn>
+            <div className="signup-divider"><span>or</span></div>
             <div className="two">
-              <Btn full onClick={() => social('google')}>Google</Btn>
-              <Btn full onClick={() => social('github')}>GitHub</Btn>
+              <Field label="Name" value={first} onChange={(e) => setFirst(e.target.value)} placeholder="First name" />
+              <Field label="Work email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
-          </section>
-
-          <section className="group">
-            <div className="group-head"><h2>Or sign up with email</h2></div>
-            <div className="two">
-              <Field label="First name" value={first} onChange={(e) => setFirst(e.target.value)} autoFocus />
-              <Field label="Last name" value={last} onChange={(e) => setLast(e.target.value)} />
-            </div>
-            <div className="two">
-              <Field label="Email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-              <Field label="Company" placeholder="Optional" value={company} onChange={(e) => setCompany(e.target.value)} />
-            </div>
-          </section>
-
-          <div className="signup-foot">
             <Btn primary full type="submit" disabled={!ready}>{p.button}</Btn>
-            <p className="fine">Free to start. $5 in memory credits, no credit card.</p>
-          </div>
+          </section>
+
+          <p className="signup-terms">Free to start. $5 in memory credits, no credit card.</p>
+          <p className="fine below"><Link to="/signin">Already have an account? Sign in</Link></p>
         </form>
-        <p className="fine below"><Link to="/signin">Already have an account? Sign in</Link></p>
       </main>
     </div>
   )

@@ -2,7 +2,14 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SiteNav, PathCard, Logos } from '../components/Hack.jsx'
 import { PATHS, PATH_ORDER } from '../data/paths.js'
+import { SHOTS } from '../components/Illos.jsx'
 import { track } from '../lib/track.js'
+
+const FEATURES = [
+  { title: 'Persistent memory', desc: 'Your agents remember across sessions. #1 on LoCoMo and LongMemEval.' },
+  { title: '17,000+ models', desc: 'OpenAI, Anthropic, open source, and everything on OpenRouter, behind one key.' },
+  { title: 'Retrieval and threads', desc: 'Agentic RAG, stateful conversations, and tool calling that carries state.' },
+]
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -21,15 +28,23 @@ export default function Landing() {
       <SiteNav />
       <main className="wrap">
         <section className="hero">
-          <h1>What are you building with?</h1>
-          <p className="sub">Persistent memory, 17,000+ models, retrieval and threads. Pick your tool and you're set up in about two minutes.</p>
+          <h1>Ship stateful AI, fast.</h1>
+          <p className="sub">Memory, models, RAG, and threads behind one API. Three ways to build. Pick the one that fits how you work.</p>
           <Logos />
+        </section>
+
+        <section className="features">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="feature">
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
+          ))}
         </section>
 
         <section className="pick" id="pick">
           <div className="sec-head">
-            <h2>Pick how you want to build.</h2>
-            <p>Free to start. $5 in memory credits, no credit card.</p>
+            <h2>Choose your setup.</h2>
           </div>
           <div className="cards" role="radiogroup" aria-label="Path">
             {PATH_ORDER.map((k) => <PathCard key={k} path={k} selected={path === k} onSelect={select} />)}
@@ -52,6 +67,8 @@ export default function Landing() {
           <span className="foot-brand">Backboard</span>
           <nav>
             <a href="#" onClick={(e) => e.preventDefault()}>Docs</a>
+            <a href="#" onClick={(e) => e.preventDefault()}>Pricing</a>
+            <a href="#" onClick={(e) => e.preventDefault()}>GitHub</a>
           </nav>
         </div>
       </footer>
