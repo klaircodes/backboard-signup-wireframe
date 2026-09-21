@@ -1,66 +1,61 @@
 import { useState } from 'react'
-import { Navigate, useNavigate, Link } from 'react-router-dom'
-import { AppBar, Btn, Field } from '../components/Hack.jsx'
+import { Link, useNavigate } from 'react-router-dom'
+import { Stepper, Btn, Field } from '../components/Hack.jsx'
 import { SHOTS } from '../components/Illos.jsx'
-import { PATHS } from '../data/paths.js'
+import { PATHS, PATH_ORDER } from '../data/paths.js'
 import { usePathParam } from '../lib/usePath.js'
 import { saveAccount, track } from '../lib/track.js'
 
+function Tile({ path, selected, onSelect }) {
+  const p = PATHS[path]; const Shot = SHOTS[path]
+  return (
+    <button type="button" className={`tile ${selected ? 'selected' : ''}`} onClick={() => onSelect(path)} role="radio" aria-checked={selected}>
+      <span className="tile-shot"><Shot /></span>
+      <span className="tile-name">{p.short === 'API' ? 'Unified API' : p.title.replace('Backboard ', '')}</span>
+    </button>
+  )
+}
+
 export default function SignUp() {
   const navigate = useNavigate()
-  const [path] = usePathParam()
-  const [first, setFirst] = useState('')
+  const [path, setPath] = usePathParam()
   const [email, setEmail] = useState('')
-  if (!path) return <Navigate to="/signup" replace />
-  const p = PATHS[path]
-  const Shot = SHOTS[path]
+  const p = path ? PATHS[path] : null
 
-  const ready = first.trim() && email.trim()
-  const submit = (e) => {
-    e.preventDefault()
-    if (!ready) return
-    saveAccount({ path, hackathon: false, activated: false, email, first })
-    track('signup_completed', { path, hackathon: false })
-    navigate(`/start/${path}`)
-  }
-  const social = (provider) => {
-    saveAccount({ path, hackathon: false, activated: false, email: '', first: '', provider })
+  const select = (next) => { setPath(next); track('path_selected', { path: next, source: 'click', hackathon: false }) }
+  const done = (provider) => {
+    if (!path) return
+    saveAccount({ path, hackathon: false, activated: false, email, provider })
     track('signup_completed', { path, hackathon: false, provider })
     navigate(`/start/${path}`)
   }
 
   return (
     <div className="page">
-      <AppBar />
-      <main className="wrap narrow">
-        <form className="signup" onSubmit={submit}>
-          <header className="signup-head">
-            <h1>Create your account</h1>
-          </header>
+      <header className="bar">
+        <div className="bar-left"><Link to="/" className="wordmark">Backboard</Link></div>
+        <Stepper step={path ? 2 : 1} />
+        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><Link to="/">Sign in</Link></nav>
+      </header>
+      <main className="auth-main">
+        <div className="auth-card">
+          <h1>Create your account</h1>
+          <p className="auth-lede">Free to start. $5 in memory credits, no card.</p>
 
-          <div className="path-row">
-            <span className="path-thumb"><Shot /></span>
-            <span className="path-text">
-              <b>{p.title}</b>
-              <span className="muted">{p.tagline}</span>
-            </span>
-            <Btn small onClick={() => navigate('/signup')}>Change</Btn>
+          <div className="tiles" role="radiogroup" aria-label="What are you here for?">
+            {PATH_ORDER.map((k) => <Tile key={k} path={k} selected={path === k} onSelect={select} />)}
           </div>
+          <p className="tile-desc">{p ? `${p.line} Best for: ${p.bestForInline}` : 'Pick how you want to build. You can switch later.'}</p>
 
-          <section className="group">
-            <Btn full onClick={() => social('google')}>Continue with Google</Btn>
-            <Btn full onClick={() => social('github')}>Continue with GitHub</Btn>
-            <div className="signup-divider"><span>or</span></div>
-            <div className="two">
-              <Field label="Name" value={first} onChange={(e) => setFirst(e.target.value)} placeholder="First name" />
-              <Field label="Work email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <Btn primary full type="submit" disabled={!ready}>{p.button}</Btn>
-          </section>
-
-          <p className="signup-terms">Free to start. $5 in memory credits, no credit card.</p>
-          <p className="fine below"><Link to="/signin">Already have an account? Sign in</Link></p>
-        </form>
+          <div className={`auth-stack ${path ? '' : 'waiting'}`}>
+            <Btn full disabled={!path} onClick={() => done('google')}>Continue with Google</Btn>
+            <Btn full disabled={!path} onClick={() => done('github')}>Continue with GitHub</Btn>
+            <div className="auth-or"><span>or</span></div>
+            <Field type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} disabled={!path} />
+            <Btn primary full disabled={!path || !email.trim()} onClick={() => done('email')}>{p ? p.button : 'Pick a path to continue'}</Btn>
+          </div>
+          <p className="auth-switch">Already have an account? <Link to="/">Sign in</Link></p>
+        </div>
       </main>
     </div>
   )

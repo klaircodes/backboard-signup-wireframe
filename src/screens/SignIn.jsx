@@ -10,19 +10,22 @@ export default function SignIn() {
   return (
     <div className="page">
       <header className="bar">
-        <div className="bar-left"><a href="/" className="wordmark">Backboard</a></div>
+        <div className="bar-left"><Link to="/" className="wordmark">Backboard</Link></div>
         <div />
-        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><Link to="/signup">Sign up</Link></nav>
+        <nav className="bar-links"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><Link to="/signup">Create account</Link></nav>
       </header>
-      <main className="wrap narrow" style={{ paddingTop: 48, paddingBottom: 88, maxWidth: 440 }}>
-        <h1 style={{ fontSize: 30, marginBottom: 20 }}>Sign in</h1>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <Btn full onClick={go}>Continue with Google</Btn>
-          <Btn full onClick={go}>Continue with GitHub</Btn>
-          <p style={{ textAlign: 'center', fontFamily: 'var(--mono)', fontSize: 13, color: 'var(--text-3)' }}>or</p>
-          <Field type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <Btn primary full onClick={go}>Sign in</Btn>
-          <p style={{ textAlign: 'center', fontSize: 14, color: 'var(--text-2)' }}>New to Backboard? <Link to="/signup" style={{ color: 'var(--text)' }}>Create an account</Link></p>
+      <main className="auth-main">
+        <div className="auth-card">
+          <h1>Sign in to Backboard</h1>
+          <p className="auth-lede">Memory, models, and retrieval behind one key.</p>
+          <div className="auth-stack">
+            <Btn full onClick={go}>Continue with Google</Btn>
+            <Btn full onClick={go}>Continue with GitHub</Btn>
+            <div className="auth-or"><span>or</span></div>
+            <Field type="email" placeholder="Work email" value={email} onChange={(e) => setEmail(e.target.value)} autoFocus />
+            <Btn primary full onClick={go}>Continue with email</Btn>
+          </div>
+          <p className="auth-switch">New to Backboard? <Link to="/signup">Create an account</Link></p>
         </div>
       </main>
     </div>
