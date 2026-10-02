@@ -15,7 +15,7 @@ export default function SignUp() {
   const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
   const [company, setCompany] = useState('')
-  if (!path) return <Navigate to="/" replace />
+  if (!path) return <Navigate to="/get-started" replace />
   const p = PATHS[path]
   const Shot = SHOTS[path]
 
@@ -47,7 +47,7 @@ export default function SignUp() {
               <b>{p.title}</b>
               <span className="muted">{p.tagline}</span>
             </span>
-            <Btn small onClick={() => navigate('/')}>Change</Btn>
+            <Btn small onClick={() => navigate('/get-started')}>Change</Btn>
           </div>
 
           <section className="group">

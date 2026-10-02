@@ -80,8 +80,6 @@ export const PATHS = {
 
 export const PATH_ORDER = ['studio', 'rcli', 'api']
 export const HACKATHON_VIDEO = '8I5QLZTdbXo'
-// Placeholder: reuses the walkthrough until a non-hackathon product video exists.
-export const PRODUCT_VIDEO = '8I5QLZTdbXo'
 
 export function isPath(value) {
   return value === 'studio' || value === 'rcli' || value === 'api'

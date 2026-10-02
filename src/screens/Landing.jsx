@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { SiteNav, Video, PathCard, Logos } from '../components/Hack.jsx'
-import { PRODUCT_VIDEO, PATHS, PATH_ORDER } from '../data/paths.js'
+import { SiteNav, PathCard, Logos } from '../components/Hack.jsx'
+import { PATHS, PATH_ORDER } from '../data/paths.js'
 import { track } from '../lib/track.js'
 
-// backboard.io — same shape as the hackathon landing: walkthrough, pick a path, what each one is, footer.
+// backboard.io — same shape as the hackathon landing: pick a path, what each one is, footer.
 export default function Landing() {
   const navigate = useNavigate()
   const [path, setPath] = useState(null)
@@ -27,7 +27,6 @@ export default function Landing() {
           <h1>Start building with Backboard.</h1>
           <p className="sub">Persistent memory, 17,000+ models, retrieval and threads behind one key. Pick how you want to build and you're set up in a minute.</p>
           <Logos />
-          <Video youtube={PRODUCT_VIDEO} caption="Product walkthrough" className="hero-video" />
         </section>
 
         <section className="pick" id="pick">

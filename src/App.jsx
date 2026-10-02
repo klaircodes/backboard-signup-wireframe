@@ -8,8 +8,9 @@ import Dashboard from './screens/Dashboard.jsx'
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="/signin" element={<SignIn />} />
+      <Route path="/" element={<SignIn />} />
+      <Route path="/signin" element={<Navigate to="/" replace />} />
+      <Route path="/get-started" element={<Landing />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/start/:path" element={<Start />} />
       <Route path="/dashboard" element={<Dashboard />} />

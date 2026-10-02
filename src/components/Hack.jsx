@@ -6,7 +6,7 @@ import { SHOTS, HeroStill } from './Illos.jsx'
 const STEPS = ['Pick a path', 'Sign up', 'Start building']
 
 // Progress across both domains: a plain breadcrumb (done · current · next) and a line under the bar that fills.
-const STEP_LINKS = ['/signup', null, null]
+const STEP_LINKS = ['/get-started', null, null]
 
 export function Stepper({ step }) {
   return (
@@ -32,11 +32,11 @@ export function Stepper({ step }) {
 export function SiteNav() {
   return (
     <header className="bar">
-      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
+      <div className="bar-left"><Link to="/get-started" className="wordmark">Backboard</Link></div>
       <Stepper step={1} />
       <nav className="bar-links">
         <a href="#" onClick={(e) => e.preventDefault()}>Docs</a>
-        <a href="#" onClick={(e) => e.preventDefault()}>Sign in</a>
+        <Link to="/">Sign in</Link>
       </nav>
     </header>
   )
@@ -45,7 +45,7 @@ export function SiteNav() {
 export function AppBar({ step = 2 }) {
   return (
     <header className="bar">
-      <div className="bar-left"><Link to="/signup" className="wordmark">Backboard</Link></div>
+      <div className="bar-left"><Link to="/get-started" className="wordmark">Backboard</Link></div>
       <Stepper step={step} />
       <a href="#" className="bar-help" onClick={(e) => e.preventDefault()}>Help</a>
     </header>

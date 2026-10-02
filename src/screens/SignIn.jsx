@@ -8,7 +8,7 @@ import { getAccount } from '../lib/track.js'
 export default function SignIn() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
-  const go = () => navigate(getAccount() ? '/dashboard' : '/signup')
+  const go = () => navigate(getAccount() ? '/dashboard' : '/get-started')
   return (
     <SoloLayout>
       <h1>Sign in</h1>
@@ -22,7 +22,7 @@ export default function SignIn() {
       </div>
       <div className="auth-fork">
         <span>New to Backboard?</span>
-        <Link to="/signup" className="btn">Create an account</Link>
+        <Link to="/get-started" className="btn">Create an account</Link>
       </div>
       <p className="auth-legal"><a href="#" onClick={(e) => e.preventDefault()}>Docs</a><a href="#" onClick={(e) => e.preventDefault()}>Privacy</a><a href="#" onClick={(e) => e.preventDefault()}>Terms</a></p>
     </SoloLayout>

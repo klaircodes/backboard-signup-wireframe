@@ -23,9 +23,9 @@ export default function Start() {
   const [windows, setWindows] = useState(false)
   const [harness, setHarness] = useState(null)
   const [done, setDone] = useState({})
-  if (!isPath(path)) return <Navigate to="/signup" replace />
+  if (!isPath(path)) return <Navigate to="/get-started" replace />
   const account = getAccount()
-  if (!account) return <Navigate to="/signup" replace />
+  if (!account) return <Navigate to="/get-started" replace />
   if (account.onboarded) return <Navigate to="/dashboard" replace />
   const p = PATHS[path]
   const first = account.first?.trim()
