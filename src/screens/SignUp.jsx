@@ -1,54 +1,83 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthLayout } from '../components/Shell.jsx'
-import { Btn, Field } from '../components/Hack.jsx'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { AppBar, Btn, Field } from '../components/Hack.jsx'
 import { GoogleIcon, GithubIcon } from '../components/Icons.jsx'
 import { SHOTS } from '../components/Illos.jsx'
-import { PATHS, PATH_ORDER } from '../data/paths.js'
+import { PATHS } from '../data/paths.js'
 import { usePathParam } from '../lib/usePath.js'
 import { saveAccount, track } from '../lib/track.js'
 
-const SHORT = { studio: 'Studio', rcli: 'R-CLI', api: 'Unified API' }
-
-function Tile({ path, selected, onSelect }) {
-  const Shot = SHOTS[path]
-  return (
-    <button type="button" className={`tile ${selected ? 'selected' : ''}`} onClick={() => onSelect(path)} role="radio" aria-checked={selected}>
-      <span className="tile-shot"><Shot /></span>
-      <span className="tile-name">{SHORT[path]}</span>
-    </button>
-  )
-}
-
+// app.backboard.io/signup — same grouped single-column form as the hackathon step 2, without the team roster or promo code.
 export default function SignUp() {
   const navigate = useNavigate()
-  const [path, setPath] = usePathParam()
+  const [path] = usePathParam()
+  const [first, setFirst] = useState('')
+  const [last, setLast] = useState('')
   const [email, setEmail] = useState('')
-  const p = path ? PATHS[path] : null
-  const select = (next) => { setPath(next); track('path_selected', { path: next, source: 'click', hackathon: false }) }
+  const [company, setCompany] = useState('')
+  if (!path) return <Navigate to="/" replace />
+  const p = PATHS[path]
+  const Shot = SHOTS[path]
+
+  const ready = first.trim() && last.trim() && email.trim()
   const done = (provider) => {
-    if (!path) return
-    saveAccount({ path, hackathon: false, activated: false, email, provider })
+    saveAccount({ path, hackathon: false, activated: false, email, first, provider })
     track('signup_completed', { path, hackathon: false, provider })
     navigate(`/start/${path}`)
   }
+  const submit = (e) => {
+    e.preventDefault()
+    if (!ready) return
+    done('email')
+  }
+
   return (
-    <AuthLayout path={path || 'studio'}>
-      <h1>Create your account</h1>
-      <p className="auth-lede">Free to start. $5 in memory credits, no card.</p>
-      <p className="tile-q">What are you building with?</p>
-      <div className="tiles" role="radiogroup" aria-label="What are you building with?">
-        {PATH_ORDER.map((k) => <Tile key={k} path={k} selected={path === k} onSelect={select} />)}
-      </div>
-      <p className="tile-desc">{p ? `${p.line} Best for: ${p.bestForInline}` : 'Pick one to continue. You can switch later.'}</p>
-      <div className={`auth-stack ${path ? '' : 'waiting'}`}>
-        <Btn full className="social" disabled={!path} onClick={() => done('google')}><GoogleIcon />Continue with Google</Btn>
-        <Btn full className="social" disabled={!path} onClick={() => done('github')}><GithubIcon />Continue with GitHub</Btn>
-        <div className="auth-or"><span>or</span></div>
-        <Field type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} disabled={!path} />
-        <Btn primary full disabled={!path || !email.trim()} onClick={() => done('email')}>{p ? p.button : 'Pick a path to continue'}</Btn>
-      </div>
-      <p className="auth-switch">Already have an account? <Link to="/">Sign in</Link></p>
-    </AuthLayout>
+    <div className="page">
+      <AppBar />
+      <main className="wrap narrow">
+        <form className="signup" onSubmit={submit}>
+          <header className="signup-head">
+            <h1>Create your account</h1>
+            <p className="sub">Free to start. $5 in memory credits, no card.</p>
+          </header>
+
+          <div className="path-row">
+            <span className="path-thumb"><Shot /></span>
+            <span className="path-text">
+              <b>{p.title}</b>
+              <span className="muted">{p.tagline}</span>
+            </span>
+            <Btn small onClick={() => navigate('/')}>Change</Btn>
+          </div>
+
+          <section className="group">
+            <div className="group-head"><h2>Sign up with</h2></div>
+            <div className="two">
+              <Btn full className="social" type="button" onClick={() => done('google')}><GoogleIcon />Continue with Google</Btn>
+              <Btn full className="social" type="button" onClick={() => done('github')}><GithubIcon />Continue with GitHub</Btn>
+            </div>
+            <div className="auth-or"><span>or use your email</span></div>
+          </section>
+
+          <section className="group">
+            <div className="group-head"><h2>About you</h2></div>
+            <div className="two">
+              <Field label="First name" value={first} onChange={(e) => setFirst(e.target.value)} autoFocus />
+              <Field label="Last name" value={last} onChange={(e) => setLast(e.target.value)} />
+            </div>
+            <div className="two">
+              <Field label="Email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <Field label="Company or school" value={company} onChange={(e) => setCompany(e.target.value)} />
+            </div>
+          </section>
+
+          <div className="signup-foot">
+            <Btn primary full type="submit" disabled={!ready}>{p.button}</Btn>
+            <p className="fine">Creates your account and adds $5 in memory credits. No card needed.</p>
+          </div>
+        </form>
+        <p className="fine below">Already have an account? <Link to="/signin">Sign in</Link></p>
+      </main>
+    </div>
   )
 }
