@@ -3,12 +3,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { SoloLayout } from '../components/Shell.jsx'
 import { Btn, Field } from '../components/Hack.jsx'
 import { GoogleIcon, GithubIcon } from '../components/Icons.jsx'
-import { getAccount } from '../lib/track.js'
+import { getAccount, saveAccount, track } from '../lib/track.js'
 
 export default function SignIn() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
-  const go = () => navigate(getAccount() ? '/dashboard' : '/get-started')
+  // Signing in means you already have an account. In the wireframe, stand one up if there isn't one yet
+  // so the dashboard renders instead of dead-ending.
+  const go = () => {
+    if (!getAccount()) saveAccount({ path: 'studio', hackathon: false, activated: true, onboarded: true, email })
+    track('signin_completed', { email })
+    navigate('/dashboard')
+  }
   return (
     <SoloLayout>
       <h1>Sign in</h1>
