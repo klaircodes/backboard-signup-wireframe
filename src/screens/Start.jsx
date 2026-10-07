@@ -6,6 +6,12 @@ import { isPath, PATHS } from '../data/paths.js'
 import { getAccount, track } from '../lib/track.js'
 
 const HARNESSES = ['Claude Code', 'Cursor', 'VS Code']
+const READY = [
+  ['Docs', 'Every command and endpoint, with examples.'],
+  ['Model library', 'Browse 17,000+ models and route per task.'],
+  ['Examples', 'Starter projects you can clone and run.'],
+  ['Support', 'Talk to the team when you get stuck.'],
+]
 
 function Check() {
   return <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -17,9 +23,9 @@ export default function Start() {
   const [windows, setWindows] = useState(false)
   const [harness, setHarness] = useState(null)
   const [done, setDone] = useState({})
-  if (!isPath(path)) return <Navigate to="/signup" replace />
+  if (!isPath(path)) return <Navigate to="/get-started" replace />
   const account = getAccount()
-  if (!account) return <Navigate to="/signup" replace />
+  if (!account) return <Navigate to="/get-started" replace />
   if (account.onboarded) return <Navigate to="/dashboard" replace />
   const p = PATHS[path]
   const first = account.first?.trim()
@@ -85,6 +91,17 @@ export default function Start() {
           <section className="group">
             <div className="group-head"><h2>Watch the walkthrough</h2></div>
             <Video youtube={p.video} caption={`${p.title} walkthrough`} className="start-video" />
+          </section>
+
+          <section className="group">
+            <div className="group-head"><h2>When you're ready</h2></div>
+            <div className="ready">
+              {READY.map(([t, d]) => (
+                <a key={t} href="#" className="ready-tile" onClick={(e) => e.preventDefault()}>
+                  <b>{t}</b><span>{d}</span>
+                </a>
+              ))}
+            </div>
           </section>
 
           <div className="end-row">
